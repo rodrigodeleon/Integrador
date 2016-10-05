@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -148,10 +156,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DestinosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TramosController.cs" />
+    <Compile Include="Controllers\TransportesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Destino.cs" />
+    <Compile Include="Models\IntegradorContext.cs" />
+    <Compile Include="Models\Tramo.cs" />
+    <Compile Include="Models\Transporte.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -194,10 +209,24 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Destinos\Create.cshtml" />
+    <Content Include="Views\Destinos\Delete.cshtml" />
+    <Content Include="Views\Destinos\Details.cshtml" />
+    <Content Include="Views\Destinos\Edit.cshtml" />
+    <Content Include="Views\Destinos\Index.cshtml" />
+    <Content Include="Views\Transportes\Create.cshtml" />
+    <Content Include="Views\Transportes\Delete.cshtml" />
+    <Content Include="Views\Transportes\Details.cshtml" />
+    <Content Include="Views\Transportes\Edit.cshtml" />
+    <Content Include="Views\Transportes\Index.cshtml" />
+    <Content Include="Views\Tramos\Create.cshtml" />
+    <Content Include="Views\Tramos\Delete.cshtml" />
+    <Content Include="Views\Tramos\Details.cshtml" />
+    <Content Include="Views\Tramos\Edit.cshtml" />
+    <Content Include="Views\Tramos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
