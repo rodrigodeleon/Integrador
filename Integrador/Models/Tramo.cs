@@ -78,5 +78,7 @@ namespace Integrador.Models
             this.arribo = arribo;
             this.partida = partida;
         }
+
+        public void mimetodo() { }
     }
 }
