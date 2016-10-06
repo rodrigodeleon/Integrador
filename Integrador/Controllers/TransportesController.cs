@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Integrador.Models;
+using Integrador.ViewModels;
 
 namespace Integrador.Controllers
 {
@@ -34,11 +35,33 @@ namespace Integrador.Controllers
             }
             return View(transporte);
         }
+        public IEnumerable<SelectListItem> GetDestinos()
+        {
 
+            var Destinos = db.Destinos.Select
+                       (x =>
+                                new SelectListItem
+                                {
+                                    Value = x.Id.ToString(),
+                                    Text = x.Nombre,
+                                });
+
+            return new SelectList(Destinos, "Value", "Text");
+            
+        }
         // GET: Transportes/Create
         public ActionResult Create()
         {
-            return View();
+
+            var model = new DestinosTransporteViewModel
+            {
+                miTransporte = new Transporte(),
+                Destinos = GetDestinos()
+           
+        };
+            return View(model);
+          
+
         }
 
         // POST: Transportes/Create
@@ -46,16 +69,22 @@ namespace Integrador.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Costo,Medio")] Transporte transporte)
+        public ActionResult Create( DestinosTransporteViewModel miDTV)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Transportes.Add(transporte);
+                miDTV.miTransporte.Origen =  db.Destinos.Find(miDTV.miTransporte.Origen.Id);
+                miDTV.miTransporte.Destino = db.Destinos.Find(miDTV.miTransporte.Destino.Id);
+                db.Transportes.Add(miDTV.miTransporte);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+
+            }
+            catch
+            {
+                return View();
             }
 
-            return View(transporte);
         }
 
         // GET: Transportes/Edit/5

@@ -26,7 +26,8 @@ namespace Integrador.Models
                 id = value;
             }
         }
-        [Required]
+
+        [Display(Name = "Origen")]
         public Destino Origen
         {
             get
@@ -39,7 +40,7 @@ namespace Integrador.Models
                 origen = value;
             }
         }
-        [Required]
+        [Display(Name = "Destino")]
         public Destino Destino
         {
             get

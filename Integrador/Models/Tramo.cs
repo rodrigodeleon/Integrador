@@ -25,7 +25,7 @@ namespace Integrador.Models
                 id = value;
             }
         }
-        [Required]
+
         public Destino Destino
         {
             get
@@ -78,7 +78,6 @@ namespace Integrador.Models
             this.arribo = arribo;
             this.partida = partida;
         }
-
-        public void mimetodo() { }
+        
     }
 }

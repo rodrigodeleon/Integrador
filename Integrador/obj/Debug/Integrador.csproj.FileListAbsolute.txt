@@ -54,3 +54,4 @@
 \\Mac\Home\Desktop\Integrador\Integrador\Integrador\bin\Newtonsoft.Json.xml
 \\Mac\Home\Desktop\Integrador\Integrador\Integrador\obj\Debug\Integrador.dll
 \\Mac\Home\Desktop\Integrador\Integrador\Integrador\obj\Debug\Integrador.pdb
+\\Mac\Home\Desktop\Integrador\Integrador\Integrador\obj\Debug\Integrador.csprojResolveAssemblyReference.cache
