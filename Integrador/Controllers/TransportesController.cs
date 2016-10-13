@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Integrador.Models;
 using Integrador.ViewModels;
+using Newtonsoft.Json;
 
 namespace Integrador.Controllers
 {
@@ -47,8 +48,31 @@ namespace Integrador.Controllers
                                 });
 
             return new SelectList(Destinos, "Value", "Text");
-            
+
         }
+
+        [HttpPost]
+        public ActionResult getTransportes(int origenId , int destinoId)
+        {
+            if (db.Destinos.Find(origenId).Costa == true && db.Destinos.Find(destinoId).Costa == true)
+            {
+
+                return Json(new[] {
+            new { Id = 1, Value = "Aereo" },
+            new { Id = 2, Value = "Terrestre" },
+            new { Id = 3, Value = "Barco" },
+             }, JsonRequestBehavior.AllowGet);
+
+            }
+
+            return Json(new[] {
+            new { Id = 1, Value = "Aereo" },
+            new { Id = 2, Value = "Terrestre" },
+             }, JsonRequestBehavior.AllowGet);
+
+        }
+
+       
         // GET: Transportes/Create
         public ActionResult Create()
         {
@@ -57,10 +81,10 @@ namespace Integrador.Controllers
             {
                 miTransporte = new Transporte(),
                 Destinos = GetDestinos()
-           
-        };
+
+            };
             return View(model);
-          
+
 
         }
 
@@ -69,11 +93,11 @@ namespace Integrador.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( DestinosTransporteViewModel miDTV)
+        public ActionResult Create(DestinosTransporteViewModel miDTV)
         {
             try
             {
-                miDTV.miTransporte.Origen =  db.Destinos.Find(miDTV.miTransporte.Origen.Id);
+                miDTV.miTransporte.Origen = db.Destinos.Find(miDTV.miTransporte.Origen.Id);
                 miDTV.miTransporte.Destino = db.Destinos.Find(miDTV.miTransporte.Destino.Id);
                 db.Transportes.Add(miDTV.miTransporte);
                 db.SaveChanges();
@@ -95,6 +119,7 @@ namespace Integrador.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Transporte transporte = db.Transportes.Find(id);
+
             if (transporte == null)
             {
                 return HttpNotFound();

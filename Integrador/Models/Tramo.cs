@@ -26,7 +26,7 @@ namespace Integrador.Models
             }
         }
 
-        public Destino Destino
+        public virtual Destino Destino
         {
             get
             {

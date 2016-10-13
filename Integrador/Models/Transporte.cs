@@ -28,7 +28,7 @@ namespace Integrador.Models
         }
 
         [Display(Name = "Origen")]
-        public Destino Origen
+        public virtual Destino Origen
         {
             get
             {
@@ -41,7 +41,7 @@ namespace Integrador.Models
             }
         }
         [Display(Name = "Destino")]
-        public Destino Destino
+        public virtual Destino Destino
         {
             get
             {
