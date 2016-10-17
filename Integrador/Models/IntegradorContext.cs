@@ -25,5 +25,7 @@ namespace Integrador.Models
         public System.Data.Entity.DbSet<Integrador.Models.Transporte> Transportes { get; set; }
 
         public System.Data.Entity.DbSet<Integrador.Models.Tramo> Tramoes { get; set; }
+
+        public System.Data.Entity.DbSet<Integrador.Models.Excursion> Excursions { get; set; }
     }
 }

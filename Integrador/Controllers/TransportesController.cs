@@ -39,7 +39,7 @@ namespace Integrador.Controllers
         public IEnumerable<SelectListItem> GetDestinos()
         {
 
-            var Destinos = db.Destinos.Select
+            var Destinos = db.Destinos.Where(x => x.Activo== true).Select
                        (x =>
                                 new SelectListItem
                                 {
@@ -51,7 +51,6 @@ namespace Integrador.Controllers
 
         }
 
-        [HttpPost]
         public ActionResult getTransportes(int origenId , int destinoId)
         {
             if (db.Destinos.Find(origenId).Costa == true && db.Destinos.Find(destinoId).Costa == true)
@@ -80,7 +79,7 @@ namespace Integrador.Controllers
             var model = new DestinosTransporteViewModel
             {
                 miTransporte = new Transporte(),
-                Destinos = GetDestinos()
+                Destinos = DestinosController.GetDestinos()
 
             };
             return View(model);
@@ -97,6 +96,7 @@ namespace Integrador.Controllers
         {
             try
             {
+                miDTV.miTransporte.Activo = true;
                 miDTV.miTransporte.Origen = db.Destinos.Find(miDTV.miTransporte.Origen.Id);
                 miDTV.miTransporte.Destino = db.Destinos.Find(miDTV.miTransporte.Destino.Id);
                 db.Transportes.Add(miDTV.miTransporte);
@@ -164,7 +164,7 @@ namespace Integrador.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Transporte transporte = db.Transportes.Find(id);
-            db.Transportes.Remove(transporte);
+            transporte.Activo = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

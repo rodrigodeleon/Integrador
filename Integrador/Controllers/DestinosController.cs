@@ -21,6 +21,24 @@ namespace Integrador.Controllers
         }
 
         // GET: Destinos/Details/5
+
+
+        public static IEnumerable<SelectListItem> GetDestinos()
+        {
+            IntegradorContext sdb = new IntegradorContext();
+
+            var Destinos = sdb.Destinos.Where(x => x.Activo == true).Select
+                       (x =>
+                                new SelectListItem
+                                {
+                                    Value = x.Id.ToString(),
+                                    Text = x.Nombre,
+                                });
+
+            return new SelectList(Destinos, "Value", "Text");
+
+        }
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -46,8 +64,10 @@ namespace Integrador.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Descripcion,Costa,CostoDiario,Pais")] Destino destino)
+        public ActionResult Create([Bind(Include = "Id,Nombre,Descripcion,Pais,CostoDiario,Costa")] Destino destino)
         {
+            destino.Activo = true;
+
             if (ModelState.IsValid)
             {
                 db.Destinos.Add(destino);
@@ -78,7 +98,7 @@ namespace Integrador.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nombre,Descripcion,Costa,CostoDiario,Pais")] Destino destino)
+        public ActionResult Edit([Bind(Include = "Id,Nombre,Descripcion,Pais,CostoDiario,Costa")] Destino destino)
         {
             if (ModelState.IsValid)
             {
@@ -110,7 +130,7 @@ namespace Integrador.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Destino destino = db.Destinos.Find(id);
-            db.Destinos.Remove(destino);
+            destino.Activo = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -25,7 +25,7 @@ namespace Integrador.Models
                 id = value;
             }
         }
-
+        [Display(Name = "Destino")]
         public virtual Destino Destino
         {
             get
@@ -39,7 +39,8 @@ namespace Integrador.Models
             }
         }
         [Required]
-        [Display(Name = "Arribo a Destino")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Arribo")]
         public DateTime Arribo
         {
             get
@@ -53,7 +54,8 @@ namespace Integrador.Models
             }
         }
         [Required]
-        [Display(Name = "Partida del Destino")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Partida")]
         public DateTime Partida
         {
             get

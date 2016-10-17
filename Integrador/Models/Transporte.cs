@@ -13,6 +13,7 @@ namespace Integrador.Models
         private Destino destino;
         private int costo;
         private string medio;
+        private Boolean activo;
 
         public int Id
         {
@@ -81,6 +82,20 @@ namespace Integrador.Models
             }
         }
 
+        public bool Activo
+        {
+            get
+            {
+                return activo;
+            }
+
+            set
+            {
+                activo = value;
+            }
+        }
+
+      
         public Transporte()
         {
                 

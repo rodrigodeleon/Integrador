@@ -74,7 +74,7 @@
 
         url: "@Url.Action("getTransportes", "Transportes")",
         data: { origenId: $("#miTransporte_Origen_Id").val(), DestinoId: $("#miTransporte_Destino_Id").val() },
-        type: "POST",
+        type: "GET",
         success: function (data) {
         
             var ddl = $('#miTransporte_Medio');

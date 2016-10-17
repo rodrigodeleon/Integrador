@@ -6,16 +6,15 @@ using System.Web;
 
 namespace Integrador.Models
 {
-    public class Destino
+    public class Excursion
     {
         private int id;
-        private string nombre;
-        private string pais;
-        private string descripcion;
-        private Boolean costa;
-        private int costoDiario;
-        private Boolean activo;
-
+        private String nombre;
+        private String descripcion;
+        private Persona creador;
+        private int duracion;
+        private Boolean activa;
+        private ICollection<Tramo> tramos;
 
         public int Id
         {
@@ -56,76 +55,78 @@ namespace Integrador.Models
             }
         }
         [Required]
-        public string Pais
+        public Persona Creador
         {
             get
             {
-                return pais;
+                return creador;
             }
 
             set
             {
-                pais = value;
+                creador = value;
             }
         }
         [Required]
-        [Display(Name = "Costo Diario")]
-        public int CostoDiario
+        public int Duracion
         {
             get
             {
-                return costoDiario;
+                return duracion;
             }
 
             set
             {
-                costoDiario = value;
+                duracion = value;
             }
         }
         [Required]
-        [Display(Name = "Tiene Costa?")]
-        public bool Costa
+        public bool Activa
         {
             get
             {
-                return costa;
+                return activa;
             }
 
             set
             {
-                costa = value;
+                activa = value;
             }
         }
-        [Display(Name = "Esta Activo?")]
-        public bool Activo
+        [Required]
+        public ICollection<Tramo> Tramos
         {
             get
             {
-                return activo;
+                return tramos;
             }
 
             set
             {
-                activo = value;
+                tramos = value;
             }
         }
 
-        public Destino()
+        internal void getDuracion()
         {
+            foreach (Tramo aux in this.tramos)
+            {
+                duracion += DateTime.Compare(aux.Arribo, aux.Partida);
+            }
+                                  
         }
 
-        public Destino( string nombre, string pais, string descripcion, Boolean costa, int costoDiario, Boolean activo)
+        public Excursion()
         {
-            
+
+        }
+
+        public Excursion(String nombre, string descripcion, Persona persona, ICollection<Tramo> tramos)
+        {
             this.nombre = nombre;
             this.descripcion = descripcion;
-            this.costa = costa;
-            this.costoDiario = costoDiario;
-            this.pais = pais;
-            this.activo = activo;
+            this.creador = persona;
+            this.tramos = tramos;
         }
-            
-       
-
     }
 }

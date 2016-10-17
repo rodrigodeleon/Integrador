@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Integrador.Models;
+using Integrador.ViewModels;
 
 namespace Integrador.Controllers
 {
@@ -33,6 +34,14 @@ namespace Integrador.Controllers
                 return HttpNotFound();
             }
             return View(tramo);
+        }
+
+        [HttpPost]
+        public ActionResult agregarTramo(int destino, DateTime arribo, DateTime partida)
+        {
+            Tramo miTramo = new Tramo(db.Destinos.Find(destino), arribo, partida);
+            
+            return Json(miTramo);
         }
 
         // GET: Tramos/Create

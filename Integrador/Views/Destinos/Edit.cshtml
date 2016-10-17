@@ -6,7 +6,6 @@
 
 <h2>Edit</h2>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -34,12 +33,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Costa, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Pais, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Costa)
-                    @Html.ValidationMessageFor(model => model.Costa, "", new { @class = "text-danger" })
-                </div>
+                @Html.EditorFor(model => model.Pais, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Pais, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -52,10 +49,12 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Pais, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Costa, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Pais, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Pais, "", new { @class = "text-danger" })
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Costa)
+                    @Html.ValidationMessageFor(model => model.Costa, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
@@ -70,7 +69,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
