@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -15,6 +17,22 @@ namespace Integrador.Models
         private String email;
         private DateTime fechaNac;
 
+        [Key]
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
+            }
+        }
+        [Required]
+        [Index(IsUnique = true)]
+        [Display(Name = "Cedula de Identidad")]
         public int Ci
         {
             get
@@ -27,7 +45,7 @@ namespace Integrador.Models
                 ci = value;
             }
         }
-
+        [Required]
         public string Nombre
         {
             get
@@ -40,7 +58,7 @@ namespace Integrador.Models
                 nombre = value;
             }
         }
-
+        [Required]
         public string Direccion
         {
             get
@@ -53,7 +71,7 @@ namespace Integrador.Models
                 direccion = value;
             }
         }
-
+        [Required]
         public int Telefono
         {
             get
@@ -66,7 +84,8 @@ namespace Integrador.Models
                 telefono = value;
             }
         }
-
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail invalido")]
+        [Required]
         public string Email
         {
             get
@@ -79,7 +98,9 @@ namespace Integrador.Models
                 email = value;
             }
         }
-
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Fecha de Nacimiento")]
         public DateTime FechaNac
         {
             get
@@ -93,18 +114,6 @@ namespace Integrador.Models
             }
         }
 
-        public int Id
-        {
-            get
-            {
-                return id;
-            }
-
-            set
-            {
-                id = value;
-            }
-        }
 
 
 

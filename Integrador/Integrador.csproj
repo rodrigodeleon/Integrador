@@ -156,14 +156,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdministradoresController.cs" />
     <Compile Include="Controllers\DestinosController.cs" />
     <Compile Include="Controllers\ExcursionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\TramosController.cs" />
     <Compile Include="Controllers\TransportesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Administrador.cs" />
     <Compile Include="Models\Destino.cs" />
     <Compile Include="Models\Excursion.cs" />
     <Compile Include="Models\IntegradorContext.cs" />
@@ -278,6 +281,16 @@
     <Content Include="Views\Tramos\Details.cshtml" />
     <Content Include="Views\Tramos\Edit.cshtml" />
     <Content Include="Views\Tramos\Index.cshtml" />
+    <Content Include="Views\Personas\Create.cshtml" />
+    <Content Include="Views\Personas\Delete.cshtml" />
+    <Content Include="Views\Personas\Details.cshtml" />
+    <Content Include="Views\Personas\Edit.cshtml" />
+    <Content Include="Views\Personas\Index.cshtml" />
+    <Content Include="Views\Administradores\Create.cshtml" />
+    <Content Include="Views\Administradores\Delete.cshtml" />
+    <Content Include="Views\Administradores\Details.cshtml" />
+    <Content Include="Views\Administradores\Edit.cshtml" />
+    <Content Include="Views\Administradores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

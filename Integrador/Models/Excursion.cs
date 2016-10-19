@@ -55,7 +55,8 @@ namespace Integrador.Models
             }
         }
         [Required]
-        public Persona Creador
+        [Display(Name = "Creador")]
+        public virtual Persona Creador
         {
             get
             {
@@ -94,7 +95,7 @@ namespace Integrador.Models
             }
         }
         [Required]
-        public ICollection<Tramo> Tramos
+        public virtual ICollection<Tramo> Tramos
         {
             get
             {
@@ -111,8 +112,9 @@ namespace Integrador.Models
         {
             foreach (Tramo aux in this.tramos)
             {
-                duracion += DateTime.Compare(aux.Arribo, aux.Partida);
+                duracion += (aux.Partida - aux.Arribo).Days;
             }
+            duracion++;
                                   
         }
 
