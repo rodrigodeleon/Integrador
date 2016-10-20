@@ -14,6 +14,8 @@ namespace Integrador.Models
         private int costo;
         private string medio;
         private Boolean activo;
+        private ICollection<Excursion> excursiones;
+        private ICollection<Compra> compras;
 
         public int Id
         {
@@ -95,7 +97,32 @@ namespace Integrador.Models
             }
         }
 
-      
+        public virtual ICollection<Excursion> Excursiones
+        {
+            get
+            {
+                return excursiones;
+            }
+
+            set
+            {
+                excursiones = value;
+            }
+        }
+
+        public virtual ICollection<Compra> Compras
+        {
+            get
+            {
+                return compras;
+            }
+
+            set
+            {
+                compras = value;
+            }
+        }
+
         public Transporte()
         {
                 

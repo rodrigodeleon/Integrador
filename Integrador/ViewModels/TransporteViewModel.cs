@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Integrador.ViewModels
 {
-    public class DestinosTransporteViewModel
+    public class TransporteViewModel
     {
        
         public IEnumerable<SelectListItem> Destinos  {get ; set;}

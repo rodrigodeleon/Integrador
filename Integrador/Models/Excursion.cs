@@ -15,6 +15,9 @@ namespace Integrador.Models
         private int duracion;
         private Boolean activa;
         private ICollection<Tramo> tramos;
+        private ICollection<Transporte> transportes;
+        private ICollection<Compra> compras;
+
 
         public int Id
         {
@@ -108,6 +111,33 @@ namespace Integrador.Models
             }
         }
 
+        public virtual ICollection<Transporte> Transportes
+
+        {
+            get
+            {
+                return transportes;
+            }
+
+            set
+            {
+                transportes = value;
+            }
+        }
+
+        public virtual ICollection<Compra> Compras
+        {
+            get
+            {
+                return compras;
+            }
+
+            set
+            {
+                compras = value;
+            }
+        }
+
         internal void getDuracion()
         {
             foreach (Tramo aux in this.tramos)
@@ -118,6 +148,20 @@ namespace Integrador.Models
                                   
         }
 
+        public int getCosto()
+        {
+            int costototal = 0;
+            foreach (Tramo aux in this.tramos)
+            {
+                costototal += aux.calcularCosto();
+            }
+            foreach (Transporte aux in this.Transportes)
+            {
+                costototal += aux.Costo;
+            }
+
+            return costototal;
+        }
         public Excursion()
         {
 

@@ -36,18 +36,20 @@ namespace Integrador.Controllers
             }
             return View(transporte);
         }
-        public IEnumerable<SelectListItem> GetDestinos()
+       
+        public static IEnumerable<SelectListItem> GetTransportes()
         {
+            IntegradorContext sdb = new IntegradorContext();
 
-            var Destinos = db.Destinos.Where(x => x.Activo== true).Select
+            var Transportes = sdb.Transportes.Select
                        (x =>
                                 new SelectListItem
                                 {
                                     Value = x.Id.ToString(),
-                                    Text = x.Nombre,
+                                    Text = "Desde: "+ x.Origen.Nombre + "  -   Hasta: " + x.Destino.Nombre + "  -   Medio: "+x.Medio+"  -   Costo: $"+ x.Costo ,
                                 });
 
-            return new SelectList(Destinos, "Value", "Text");
+            return new SelectList(Transportes, "Value", "Text");
 
         }
 
@@ -76,7 +78,7 @@ namespace Integrador.Controllers
         public ActionResult Create()
         {
 
-            var model = new DestinosTransporteViewModel
+            var model = new TransporteViewModel
             {
                 miTransporte = new Transporte(),
                 Destinos = DestinosController.GetDestinos()
@@ -92,7 +94,7 @@ namespace Integrador.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(DestinosTransporteViewModel miDTV)
+        public ActionResult Create(TransporteViewModel miDTV)
         {
             try
             {

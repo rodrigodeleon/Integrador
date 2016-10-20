@@ -80,6 +80,12 @@ namespace Integrador.Models
             this.arribo = arribo;
             this.partida = partida;
         }
+
+        public int calcularCosto()
+        {
+            return  (partida - arribo).Days * destino.CostoDiario;
+
+        }
         
     }
 }
