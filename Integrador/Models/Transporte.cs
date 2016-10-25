@@ -97,7 +97,7 @@ namespace Integrador.Models
             }
         }
 
-        public virtual ICollection<Excursion> Excursiones
+        public ICollection<Excursion> Excursiones
         {
             get
             {
@@ -110,7 +110,7 @@ namespace Integrador.Models
             }
         }
 
-        public virtual ICollection<Compra> Compras
+        public ICollection<Compra> Compras
         {
             get
             {

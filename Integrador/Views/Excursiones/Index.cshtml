@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Integrador.Models.Excursion>
+
+@{
+    ViewBag.Title = "Listado de Excursiones";
+}
+
+<h3>Excursiones</h3>
+
+</hr>
+
+@using (Html.BeginForm("IndexCi", "Excursiones", FormMethod.Get))
+{
+    <p>
+        Filtrar por CI Creador:
+        <input class="form-control text-box single-line" name="ci" type="text"> 
+    </p>
+    <input type="submit" value="Filtrar" class="btn btn-default" /> @:&nbsp;  @Html.ActionLink("Borrar Filtros", "Index") 
+}
+</br>
+@if (@ViewBag.Ci != null)   { <p> Ci: @ViewBag.Ci </p>}
+<table class="table" id="excursionesTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duracion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Creador)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duracion) dias
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creador.Nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+</br>
+<p>
+    @Html.ActionLink("Crear Nueva Excursion", "Create")
+</p>

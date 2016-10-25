@@ -1,0 +1,241 @@
+﻿@model Integrador.ViewModels.ExcursionViewModel
+
+@{
+    ViewBag.Title = "Nueva Excursion";
+}
+
+<h3>Nueva Excursion</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h4>Destinos</h4>
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.HiddenFor(m => m.tramosJson)
+
+            @Html.LabelFor(m => m.miTramo.Destino, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model != null)
+                {
+                @Html.DropDownListFor(m => m.miTramo.Destino.Id, Model.Destinos, new { htmlAttributes = new { @class = "form-control" } })
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.miTramo.Arribo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.miTramo.Arribo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.miTramo.Arribo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.miTramo.Partida, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.miTramo.Partida, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.miTramo.Partida, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="agregarDestinobtn" type="button" value="Agregar Destino" class="btn btn-default" />
+            </div>
+        </div>
+
+
+
+
+        <table id="tablaDestinos" class="table" style="display:none">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.miTramo.Destino.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.miTramo.Destino)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.miTramo.Arribo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.miTramo.Partida)
+                </th>
+
+                <th></th>
+            </tr>
+
+        </table>
+    </div>
+
+    <h4>Transportes</h4>
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                @Html.HiddenFor(m => m.transportesJson)
+
+                @Html.LabelFor(m => m.miTransporte, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @if (Model != null)
+                {
+                    @Html.DropDownListFor(m => m.miTransporte.Id, Model.Transportes, new { htmlAttributes = new { @class = "form-control" } })
+                    }
+                    <br />
+                    <br />
+                </div>
+
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="agregarTransportebtn" type="button" value="Agregar Transporte" class="btn btn-default" />
+                </div>
+            </div>
+
+            <table id="tablaTransportes" class="table" style="display:none">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.miTransporte.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayName("Info Transporte")
+                    </th>
+                    <th>
+                    </th>
+
+                </tr>
+            </table>
+        </div>
+      
+          <h4>Detalles Finales</h4>
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.miExcursion.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.miExcursion.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.miExcursion.Nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.miExcursion.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.miExcursion.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.miExcursion.Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+
+                @Html.LabelFor(m => m.miExcursion.Creador, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @if (Model != null)
+                {
+                        @Html.DropDownListFor(m => m.miExcursion.Creador.Id, Model.Clientes, new { htmlAttributes = new { @class = "form-control" } })
+                        }
+                </div>
+            </div>
+
+        </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Crear Excursion" class="btn btn-default" />
+                </div>
+            </div>
+            <br/>
+
+            <div>
+                @Html.ActionLink("Listado de Excursiones", "Index")
+            </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $('#agregarDestinobtn').on('click', function () {
+
+                var destino = $('#miTramo_Destino_Id').val();
+                var arribo = $('#miTramo_Arribo').val();
+                var partida = $('#miTramo_Partida').val();
+                var destinoText = $('#miTramo_Destino_Id option:selected').text();
+
+                $('#tablaDestinos tr:last').after('<tr><td>' + destino + '</td><td>' + destinoText + '</td><td>' + arribo + '</td><td>' + partida + '</td><td> <a class="deleteRowButton">Borrar</a> </td></tr>');
+                document.getElementById("tablaDestinos").style.display = "table";
+                var obj = tableToObj(document.getElementById('tablaDestinos'));
+                var json = JSON.stringify(obj);
+                console.log(json);
+                console.log(obj);
+                document.getElementById('tramosJson').setAttribute('value', json);
+                console.log($('#tramosJson').val());
+
+                $('.deleteRowButton').click(DeleteRow);
+
+
+            });
+
+            $('#agregarTransportebtn').on('click', function () {
+
+                var id = $('#miTransporte_Id').val();
+                var transporteText = $('#miTransporte_Id option:selected').text();
+
+                $('#tablaTransportes tr:last').after('<tr><td>' + id + '</td><td>' + transporteText + '</td><td> <a class="deleteRowButton">Borrar</a> </td></tr>');
+                document.getElementById("tablaTransportes").style.display = "table";
+                var obj = tableToObj(document.getElementById('tablaTransportes'));
+
+                var json = JSON.stringify(obj);
+                document.getElementById('transportesJson').setAttribute('value', json);
+                console.log($('#transportesJson').val());
+
+                $('.deleteRowButton').click(DeleteRow);
+
+
+            });
+
+            function DeleteRow() {
+                $(this).parents('tr').first().remove();
+
+
+            }
+            function tableToObj(table) {
+                var trs = table.rows,
+                    trl = trs.length,
+                    i = 0,
+                    j = 0,
+                    keys = [],
+                    obj, ret = [];
+
+                for (; i < trl; i++) {
+                    if (i == 0) {
+                        for (; j < trs[i].children.length - 1; j++) { //utilizo length -1 para que no me guarde la celda del borrar
+                            keys.push(trs[i].children[j].innerHTML);
+                        }
+                    } else {
+                        obj = {};
+                        for (j = 0; j < trs[i].children.length - 1; j++) { //utilizo length -1 para que no me guarde la celda del borrar
+                            obj[keys[j]] = trs[i].children[j].innerHTML;
+                        }
+                        ret.push(obj);
+                    }
+                }
+
+                return ret;
+            };
+
+        });
+
+
+    </script>
+}

@@ -83,7 +83,7 @@ namespace Integrador.Models
 
         public int calcularCosto()
         {
-            return  (partida - arribo).Days * destino.CostoDiario;
+            return  (partida - arribo).Days * Destino.CostoDiario;
 
         }
         

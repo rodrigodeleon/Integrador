@@ -125,7 +125,7 @@ namespace Integrador.Models
             }
         }
 
-        public virtual ICollection<Compra> Compras
+        public ICollection<Compra> Compras
         {
             get
             {
@@ -151,17 +151,18 @@ namespace Integrador.Models
         public int getCosto()
         {
             int costototal = 0;
-            foreach (Tramo aux in this.tramos)
+            foreach (Tramo aux in Tramos)
             {
                 costototal += aux.calcularCosto();
             }
-            foreach (Transporte aux in this.Transportes)
+            foreach (Transporte aux in Transportes)
             {
                 costototal += aux.Costo;
             }
 
             return costototal;
         }
+
         public Excursion()
         {
 

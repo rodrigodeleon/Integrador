@@ -1,0 +1,125 @@
+﻿@model Integrador.Models.Excursion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3>Excursion</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duracion) dias
+        </dd>
+        <dt>
+            @Html.DisplayName("Costo")
+        </dt>
+
+        <dd>
+            $@ViewBag.Costo
+        </dd>
+      
+            <dt>
+                @Html.DisplayNameFor(model => model.Activa)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Activa)
+            </dd>
+
+</dl>
+    <h4>Destinos Incluidos:</h4> 
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Destino")
+            </th>
+            <th>
+                @Html.DisplayName("Fecha de Llegada")
+            </th>
+            <th>
+                @Html.DisplayName("Fecha de Partida")
+            </th>
+            <th>
+                @Html.DisplayName("Costo Diario")
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model.Tramos)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Destino.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Arribo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Partida)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.Destino.CostoDiario)
+                </td>
+
+            </tr>
+        }
+        </table>
+
+
+    <h4>Transportes Incluidos:</h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Origen")
+            </th>
+            <th>
+                @Html.DisplayName("Destino")
+            </th>
+            <th>
+                @Html.DisplayName("Costo")
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model.Transportes)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Origen.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Destino.Nombre)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.Costo)
+                </td>
+
+            </tr>
+        }
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Volver a la Lista", "Index")
+</div>

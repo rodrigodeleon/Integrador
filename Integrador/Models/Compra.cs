@@ -12,7 +12,7 @@ namespace Integrador.Models
         private Persona cliente;
         private DateTime fecha;
         private ICollection<Transporte> transportes;
-        private ICollection<Exception> excursiones;
+        private ICollection<Excursion> excursiones;
 
         public int Id
         {
@@ -67,7 +67,7 @@ namespace Integrador.Models
             }
         }
 
-        public virtual ICollection<Exception> Excursiones
+        public virtual ICollection<Excursion> Excursiones
         {
             get
             {
