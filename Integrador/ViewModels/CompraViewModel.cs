@@ -16,6 +16,9 @@ namespace Integrador.ViewModels
         public IEnumerable<SelectListItem> Excursiones { get; set; }
         public Transporte miTransporte { get; set; }
         public Excursion miExcursion { get; set; }
-
-    }
+        public TransporteCompra miTransporteCompra { get; set; }
+        public ExcursionCompra miExcursionCompra { get; set; }
+        public string transportesJson { get; set; }
+        public string excursionesJson { get; set; }
+}
 }

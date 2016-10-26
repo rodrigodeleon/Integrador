@@ -16,7 +16,6 @@ namespace Integrador.Models
         private Boolean activa;
         private ICollection<Tramo> tramos;
         private ICollection<Transporte> transportes;
-        private ICollection<Compra> compras;
 
 
         public int Id
@@ -125,18 +124,6 @@ namespace Integrador.Models
             }
         }
 
-        public ICollection<Compra> Compras
-        {
-            get
-            {
-                return compras;
-            }
-
-            set
-            {
-                compras = value;
-            }
-        }
 
         internal void getDuracion()
         {
@@ -165,6 +152,7 @@ namespace Integrador.Models
 
         public Excursion()
         {
+            creador = new Persona();
 
         }
 

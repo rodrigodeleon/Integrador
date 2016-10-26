@@ -6,8 +6,9 @@
 
 <h3>Excursiones</h3>
 
-</hr>
-
+<hr/>
+    @Html.ActionLink("Crear Nueva Excursion", "Create")
+<hr/>
 @using (Html.BeginForm("IndexCi", "Excursiones", FormMethod.Get))
 {
     <p>
@@ -16,7 +17,7 @@
     </p>
     <input type="submit" value="Filtrar" class="btn btn-default" /> @:&nbsp;  @Html.ActionLink("Borrar Filtros", "Index") 
 }
-</br>
+<br/>
 @if (@ViewBag.Ci != null)   { <p> Ci: @ViewBag.Ci </p>}
 <table class="table" id="excursionesTable">
     <tr>
@@ -59,7 +60,8 @@
     }
 
 </table>
-</br>
-<p>
-    @Html.ActionLink("Crear Nueva Excursion", "Create")
-</p>
+<input type="button" value="Imprimir" class="btn btn-default" onclick="window.print();" />
+
+<br/>
+<br/>
+

@@ -60,7 +60,6 @@ namespace Integrador.Controllers
             Transporte t = new Transporte();
             aux.Destino = d;
 
-
             var model = new ExcursionViewModel
             {
                 miTransporte = t,
@@ -82,7 +81,6 @@ namespace Integrador.Controllers
         {
             try
             {
-
                 db.Excursions.Add(crearExcursion(excursionVM));
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -109,9 +107,9 @@ namespace Integrador.Controllers
                 IEnumerable<IDictionary<String, String>> aux = (IEnumerable<IDictionary<String, String>>)oJS.Deserialize(excursionVM.tramosJson, typeof(IEnumerable<IDictionary<String, String>>));
                 foreach (IDictionary<String, String> res in aux)
                 {
-                    string id = res["\n                    Id\n                "];
-                    string arribo = res["\n                    Arribo\n                "];
-                    string partida = res["\n                    Partida\n                "];
+                    string id = res["Id"];
+                    string arribo = res["Arribo"];
+                    string partida = res["Partida"];
 
                     Tramo miTramo = new Tramo(db.Destinos.Find(int.Parse(id)), DateTime.Parse(arribo), DateTime.Parse(partida));
                     excursionVM.miExcursion.Tramos.Add(miTramo);
@@ -120,7 +118,7 @@ namespace Integrador.Controllers
                 foreach (IDictionary<String, String> res in aux2)
                 {
                     Console.Write(res.Keys);
-                    string id = res["\n                        Id\n                    "];
+                    string id = res["Id"];
                     excursionVM.miExcursion.Transportes.Add(db.Transportes.Find(int.Parse(id)));
                 }
 
@@ -137,8 +135,11 @@ namespace Integrador.Controllers
 
         public ActionResult calcularCosto(ExcursionViewModel excursionVM)
         {
+            excursionVM.miExcursion = new Excursion();
+            excursionVM.miExcursion.Creador.Id = 1;
             int costo = crearExcursion(excursionVM).getCosto();
-            return Json(costo);
+            return Json(new[] {
+            new { Costo = costo } }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Excursiones/Edit/5

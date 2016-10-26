@@ -170,10 +170,12 @@
     <Compile Include="Models\Compra.cs" />
     <Compile Include="Models\Destino.cs" />
     <Compile Include="Models\Excursion.cs" />
+    <Compile Include="Models\ExcursionCompra.cs" />
     <Compile Include="Models\IntegradorContext.cs" />
     <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Tramo.cs" />
     <Compile Include="Models\Transporte.cs" />
+    <Compile Include="Models\TransporteCompra.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CompraViewModel.cs" />
     <Compile Include="ViewModels\TransporteViewModel.cs" />

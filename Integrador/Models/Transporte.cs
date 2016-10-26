@@ -15,7 +15,6 @@ namespace Integrador.Models
         private string medio;
         private Boolean activo;
         private ICollection<Excursion> excursiones;
-        private ICollection<Compra> compras;
 
         public int Id
         {
@@ -110,19 +109,7 @@ namespace Integrador.Models
             }
         }
 
-        public ICollection<Compra> Compras
-        {
-            get
-            {
-                return compras;
-            }
-
-            set
-            {
-                compras = value;
-            }
-        }
-
+      
         public Transporte()
         {
                 

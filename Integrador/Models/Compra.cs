@@ -11,8 +11,8 @@ namespace Integrador.Models
         private int id;
         private Persona cliente;
         private DateTime fecha;
-        private ICollection<Transporte> transportes;
-        private ICollection<Excursion> excursiones;
+        private ICollection<TransporteCompra> transportes;
+        private ICollection<ExcursionCompra> excursiones;
 
         public int Id
         {
@@ -27,7 +27,7 @@ namespace Integrador.Models
             }
         }
 
-        public Persona Cliente
+        public  virtual Persona Cliente
         {
             get
             {
@@ -53,8 +53,7 @@ namespace Integrador.Models
                 fecha = value;
             }
         }
-
-        public virtual ICollection<Transporte> Transportes
+        public virtual ICollection<TransporteCompra> Transportes
         {
             get
             {
@@ -66,8 +65,7 @@ namespace Integrador.Models
                 transportes = value;
             }
         }
-
-        public virtual ICollection<Excursion> Excursiones
+        public virtual ICollection<ExcursionCompra> Excursiones
         {
             get
             {
@@ -79,5 +77,15 @@ namespace Integrador.Models
                 excursiones = value;
             }
         }
+
+        public Compra()
+        {
+            transportes = new List<TransporteCompra>();
+            excursiones = new List<ExcursionCompra>();
+                
+        }
+
+        
+
     }
 }
