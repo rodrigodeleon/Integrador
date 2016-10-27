@@ -77,7 +77,7 @@ namespace Integrador.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( ExcursionViewModel excursionVM)
+        public ActionResult Create(ExcursionViewModel excursionVM)
         {
             try
             {
@@ -114,8 +114,8 @@ namespace Integrador.Controllers
                     Tramo miTramo = new Tramo(db.Destinos.Find(int.Parse(id)), DateTime.Parse(arribo), DateTime.Parse(partida));
                     excursionVM.miExcursion.Tramos.Add(miTramo);
                 }
-                IEnumerable<IDictionary<String, String>> aux2 = (IEnumerable<IDictionary<String, String>>)oJS.Deserialize(excursionVM.transportesJson, typeof(IEnumerable<IDictionary<String, String>>));
-                foreach (IDictionary<String, String> res in aux2)
+                aux = (IEnumerable<IDictionary<String, String>>)oJS.Deserialize(excursionVM.transportesJson, typeof(IEnumerable<IDictionary<String, String>>));
+                foreach (IDictionary<String, String> res in aux)
                 {
                     Console.Write(res.Keys);
                     string id = res["Id"];
@@ -123,7 +123,7 @@ namespace Integrador.Controllers
                 }
 
                 excursionVM.miExcursion.getDuracion();
-              
+
             }
             catch (Exception ex)
             {
@@ -136,10 +136,37 @@ namespace Integrador.Controllers
         public ActionResult calcularCosto(ExcursionViewModel excursionVM)
         {
             excursionVM.miExcursion = new Excursion();
+            excursionVM.miExcursion.Creador = new Persona();
             excursionVM.miExcursion.Creador.Id = 1;
             int costo = crearExcursion(excursionVM).getCosto();
             return Json(new[] {
             new { Costo = costo } }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public static IEnumerable<SelectListItem> GetExcursiones()
+        {
+            IntegradorContext sdb = new IntegradorContext();
+            var exc = sdb.Excursions.ToList();
+            List<SelectListItem> sl = new List<SelectListItem>();
+            foreach (Excursion a in exc)
+            {
+                string text = "Nombre: " + a.Nombre + "  -   Descripcion: " + a.Descripcion + " - Destinos Incluidos: ";
+
+                foreach (Tramo t in a.Tramos)
+                {
+                    text += (t.Destino.Nombre)+ ", ";
+                }
+                text += " - Duracion: " + a.Duracion.ToString() + " dias";
+                text += " - Costo Total: $" +a.getCosto().ToString();
+                sl.Add(new SelectListItem
+                {
+                    Value = a.Id.ToString(),
+                    Text = text
+                });
+            };
+            return new SelectList(sl, "Value", "Text");
+
         }
 
         // GET: Excursiones/Edit/5

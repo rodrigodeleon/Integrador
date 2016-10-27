@@ -1,4 +1,5 @@
-﻿using Integrador.Models;
+﻿using Integrador.Controllers;
+using Integrador.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,20 @@ namespace Integrador.ViewModels
         public ExcursionCompra miExcursionCompra { get; set; }
         public string transportesJson { get; set; }
         public string excursionesJson { get; set; }
-}
+
+        public CompraViewModel()
+        {
+            micliente = new Persona();
+            miCompra = new Compra();
+            miTransporte = new Transporte();
+            miExcursion = new Excursion();
+            miTransporteCompra = new TransporteCompra();
+            miExcursionCompra = new ExcursionCompra();
+            Excursiones = ExcursionesController.GetExcursiones();
+            Transportes = TransportesController.GetTransportes();
+            Clientes = PersonasController.GetPersonas();
+
+
+        }
+    }
 }

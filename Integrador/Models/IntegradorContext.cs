@@ -29,5 +29,11 @@ namespace Integrador.Models
         public System.Data.Entity.DbSet<Integrador.Models.Excursion> Excursions { get; set; }
 
         public System.Data.Entity.DbSet<Integrador.Models.Persona> Personas { get; set; }
+
+        public System.Data.Entity.DbSet<Integrador.Models.Compra> Compras { get; set; }
+
+        public System.Data.Entity.DbSet<Integrador.Models.TransporteCompra> TransporteCompras { get; set; }
+
+        public System.Data.Entity.DbSet<Integrador.Models.ExcursionCompra> ExcursionCompras { get; set; }
     }
 }

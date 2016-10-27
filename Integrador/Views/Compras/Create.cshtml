@@ -1,0 +1,262 @@
+﻿@model Integrador.ViewModels.CompraViewModel
+
+@{
+    ViewBag.Title = "Nueva Compra";
+}
+
+<h3>Nueva Compra</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    <h4>Transportes a Comprar</h4>
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(m => m.transportesJson)
+
+            @Html.LabelFor(m => m.miTransporteCompra.Transporte, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.miTransporteCompra.Transporte.Id, Model.Transportes, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.miTransporteCompra.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.miTransporteCompra.Fecha, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.miTransporteCompra.Fecha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.miTransporteCompra.Cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.miTransporteCompra.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.miTransporteCompra.Cantidad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-offset-2 col-md-10">
+                <input id="agregarTransportebtn" type="button" value="Agregar Transporte" class="btn btn-default" />
+            </div>
+        </div>
+        <table id="tablaTransportes" class="table" style="display:none">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.miTransporteCompra.Transporte.Id)
+                </th>
+                <th>
+                    @Html.DisplayName("Info Transporte")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.miTransporteCompra.Fecha)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.miTransporteCompra.Cantidad)
+                </th>
+                <th>
+                </th>
+
+            </tr>
+        </table>
+
+    </div>
+
+    <hr />
+
+    <h4>Excursiones a Comprar</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.HiddenFor(m => m.excursionesJson)
+
+                @Html.LabelFor(m => m.miExcursionCompra.Excursion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.miExcursionCompra.Excursion.Id, Model.Excursiones, new { htmlAttributes = new { @class = "form-control" } })
+                    <br />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.miExcursionCompra.Cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.miExcursionCompra.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.miExcursionCompra.Cantidad, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                <br />
+            </div>
+            <div class="form-group">
+
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="agregarExcursionbtn" type="button" value="Agregar Excursion" class="btn btn-default" />
+                </div>
+
+            </div>
+            <table id="tablaExcursiones" class="table" style="display:none">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.miExcursionCompra.Excursion.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayName("Info Excursion")
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.miExcursionCompra.Cantidad)
+                    </th>
+                    <th>
+                    </th>
+
+                </tr>
+            </table>
+
+
+        </div>
+
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.miCompra.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.miCompra.Fecha, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.miCompra.Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.miCompra.Cliente, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.miCompra.Cliente.Id, Model.Clientes, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <br />
+                        @Html.Label("Costo Total: ") &nbsp;<label id="costoTotal"> </label>
+                        <br />
+                        <input type="submit" value="Comprar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+}
+
+<div>
+    @Html.ActionLink("Volver a la Lista", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $('#agregarExcursionbtn').on('click', function () {
+
+                var excursion = $('#miExcursionCompra_Excursion_Id').val();
+                var cantidad = $('#miExcursionCompra_Cantidad').val();
+                var excursionText = $('#miExcursionCompra_Excursion_Id option:selected').text();
+
+                $('#tablaExcursiones tr:last').after('<tr><td>' + excursion + '</td><td>' + excursionText + '</td><td>' + cantidad + '</td><td> <a class="deleteRowButton">Borrar</a> </td></tr>');
+                document.getElementById("tablaExcursiones").style.display = "table";
+                var obj = tableToObj(document.getElementById('tablaExcursiones'));
+                var json = JSON.stringify(obj);
+                document.getElementById('excursionesJson').setAttribute('value', json);
+                console.log($('#excursionesJson').val());
+
+                $('.deleteRowButton').click(DeleteRow);
+                calcularCosto();
+
+
+            });
+
+            $('#agregarTransportebtn').on('click', function () {
+
+                var id = $('#miTransporteCompra_Transporte_Id').val();
+                var transporteText = $('#miTransporteCompra_Transporte_Id option:selected').text();
+                var cantidad = $('#miTransporteCompra_Cantidad').val();
+                var fechaViaje = $('#miTransporteCompra_Fecha').val();
+
+                $('#tablaTransportes tr:last').after('<tr><td>' + id + '</td><td>' + transporteText + '</td><td>' + fechaViaje + '</td><td>' + cantidad + '</td><td> <a class="deleteRowButton">Borrar</a> </td></tr>');
+                document.getElementById("tablaTransportes").style.display = "table";
+                var obj = tableToObj(document.getElementById('tablaTransportes'));
+
+                var json = JSON.stringify(obj);
+                document.getElementById('transportesJson').setAttribute('value', json);
+                console.log($('#transportesJson').val());
+
+                $('.deleteRowButton').click(DeleteRow);
+                calcularCosto();
+
+
+            });
+
+            function DeleteRow() {
+
+                $(this).parents('tr').first().remove();
+
+                var obj = tableToObj(document.getElementById('tablaExcursiones'));
+                var json = JSON.stringify(obj);
+                document.getElementById('excursionesJson').setAttribute('value', json);
+
+                var obj = tableToObj(document.getElementById('tablaTransportes'));
+                var json = JSON.stringify(obj);
+                document.getElementById('transportesJson').setAttribute('value', json);
+
+                calcularCosto();
+            }
+
+            function tableToObj(table) {
+                var trs = table.rows,
+                    trl = trs.length,
+                    i = 0,
+                    j = 0,
+                    keys = [],
+                    obj, ret = [];
+
+                for (; i < trl; i++) {
+                    if (i == 0) {
+                        for (; j < trs[i].children.length - 1; j++) { //utilizo length -1 para que no me guarde la celda del borrar
+                            keys.push(trs[i].children[j].innerText);
+                        }
+                    } else {
+                        obj = {};
+                        for (j = 0; j < trs[i].children.length - 1; j++) { //utilizo length -1 para que no me guarde la celda del borrar
+                            obj[keys[j]] = trs[i].children[j].innerHTML;
+                        }
+                        ret.push(obj);
+                    }
+                }
+
+                return ret;
+            };
+
+            function calcularCosto() {
+                $.ajax({
+
+                    url: "@Url.Action("calcularCosto", "Compras")",
+                    data: { excursionesJson: $('#excursionesJson').val(), transportesJson: $('#transportesJson').val() },
+                    type: "GET",
+                    success: function (data) {
+                        console.log(data);
+                        $("#costoTotal").text(" $" + data[0].Costo);
+                    },
+                    error: function (request, status, error) {
+                        console.log(error);
+                    }
+                });
+            }
+        });
+
+
+    </script>
+}

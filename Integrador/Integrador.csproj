@@ -157,11 +157,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdministradoresController.cs" />
+    <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\DestinosController.cs" />
+    <Compile Include="Controllers\ExcursionComprasController.cs" />
     <Compile Include="Controllers\ExcursionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\TramosController.cs" />
+    <Compile Include="Controllers\TransporteComprasController.cs" />
     <Compile Include="Controllers\TransportesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -295,6 +298,21 @@
     <Content Include="Views\Administradores\Details.cshtml" />
     <Content Include="Views\Administradores\Edit.cshtml" />
     <Content Include="Views\Administradores\Index.cshtml" />
+    <Content Include="Views\Compras\Create.cshtml" />
+    <Content Include="Views\Compras\Delete.cshtml" />
+    <Content Include="Views\Compras\Details.cshtml" />
+    <Content Include="Views\Compras\Edit.cshtml" />
+    <Content Include="Views\Compras\Index.cshtml" />
+    <Content Include="Views\TransporteCompras\Create.cshtml" />
+    <Content Include="Views\TransporteCompras\Delete.cshtml" />
+    <Content Include="Views\TransporteCompras\Details.cshtml" />
+    <Content Include="Views\TransporteCompras\Edit.cshtml" />
+    <Content Include="Views\TransporteCompras\Index.cshtml" />
+    <Content Include="Views\ExcursionCompras\Create.cshtml" />
+    <Content Include="Views\ExcursionCompras\Delete.cshtml" />
+    <Content Include="Views\ExcursionCompras\Details.cshtml" />
+    <Content Include="Views\ExcursionCompras\Edit.cshtml" />
+    <Content Include="Views\ExcursionCompras\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

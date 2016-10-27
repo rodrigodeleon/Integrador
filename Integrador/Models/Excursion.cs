@@ -152,7 +152,7 @@ namespace Integrador.Models
 
         public Excursion()
         {
-            creador = new Persona();
+         
 
         }
 

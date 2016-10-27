@@ -33,13 +33,20 @@
             @Html.DisplayFor(model => model.Duracion) dias
         </dd>
         <dt>
-            @Html.DisplayName("Costo")
+            @Html.DisplayName("Costo Total")
         </dt>
 
         <dd>
             $@ViewBag.Costo
         </dd>
       
+        <dt>
+            @Html.DisplayNameFor(model => model.Creador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Creador.Nombre)
+        </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.Activa)
             </dt>
@@ -100,6 +107,9 @@
             <th>
                 @Html.DisplayName("Costo")
             </th>
+            <th>
+                @Html.DisplayName("Costo")
+            </th>
 
         </tr>
 
@@ -113,6 +123,9 @@
                     @Html.DisplayFor(modelItem => item.Destino.Nombre)
                 </td>
                 <td>
+                    $@Html.DisplayFor(modelItem => item.Medio)
+                </td>
+                <td>
                     $@Html.DisplayFor(modelItem => item.Costo)
                 </td>
 
@@ -120,7 +133,7 @@
         }
     </table>
 </div>
-<input type="button" value="Imprimir Listado" class="btn btn-default" onclick="window.print();" />
+<input type="button" value="Imprimir" class="btn btn-default" onclick="window.print();" />
 <br/>
 <br/>
 <div>
