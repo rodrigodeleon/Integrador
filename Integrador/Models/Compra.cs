@@ -85,7 +85,19 @@ namespace Integrador.Models
                 
         }
 
-        
+        public int getCosto()
+        {
+            int costo = 0;
+            foreach (ExcursionCompra e in Excursiones)
+            {
+                costo += e.Excursion.getCosto() * e.Cantidad;
+            }
+            foreach (TransporteCompra t in Transportes)
+            {
+                costo += t.Transporte.Costo * t.Cantidad;
+            }
+            return costo;
+        }
 
     }
 }

@@ -1,15 +1,27 @@
 ﻿@model Integrador.Models.Compra
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles de la Compra";
 }
-
-<h2>Details</h2>
-
+<hr />
+<h3>Compra</h3>
 <div>
-    <h4>Compra</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.Nombre)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Fecha)
         </dt>
@@ -18,9 +30,116 @@
             @Html.DisplayFor(model => model.Fecha)
         </dd>
 
+        <dt>
+            @Html.DisplayName("Costo Total:")
+        </dt>
+
+        <dd>
+            $@ViewBag.Costo
+        </dd>
+
     </dl>
 </div>
+
+<h4>Excursiones Incluidas:</h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nombre")
+        </th>
+        <th>
+            @Html.DisplayName("Descripcion")
+        </th>
+        <th>
+            @Html.DisplayName("Duracion")
+        </th>
+        <th>
+            @Html.DisplayName("Cantidad Compradas")
+        </th>
+        <th>
+
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model.Excursiones)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Excursion.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Excursion.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Excursion.Duracion) dias
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.ActionLink("Detalles de la Excursion", "Details", "Excursiones", new { id = item.Excursion.Id },null)
+            </td>
+
+        </tr>
+    }
+</table>
+
+
+
+<h4>Transportes Incluidos:</h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Origen")
+        </th>
+        <th>
+            @Html.DisplayName("Destino")
+        </th>
+        <th>
+            @Html.DisplayName("Medio")
+        </th>
+        <th>
+            @Html.DisplayName("Fecha de Viaje")
+        </th>
+        <th>
+            @Html.DisplayName("Costo")
+        </th>
+        <th>
+            @Html.DisplayName("Cantidad Comprados")
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model.Transportes)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Transporte.Origen.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Transporte.Destino.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Transporte.Medio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.Transporte.Costo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+
+        </tr>
+    }
+</table>
+<input type="button" value="Imprimir" class="btn btn-default" onclick="window.print();" />
+<br/>
+<br />
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver a la Lista", "Index")
 </p>

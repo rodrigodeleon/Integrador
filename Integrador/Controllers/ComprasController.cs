@@ -31,6 +31,7 @@ namespace Integrador.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Compra compra = db.Compras.Find(id);
+            ViewBag.Costo = compra.getCosto();
             if (compra == null)
             {
                 return HttpNotFound();
