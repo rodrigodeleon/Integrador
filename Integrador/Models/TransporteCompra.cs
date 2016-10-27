@@ -52,7 +52,6 @@ namespace Integrador.Models
                 cantidad = value;
             }
         }
-        [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha de Viaje")]
         public DateTime Fecha
@@ -71,6 +70,14 @@ namespace Integrador.Models
         public TransporteCompra()
         {
                 
+        }
+
+        public TransporteCompra(Transporte transporte, int cantidad, DateTime date)
+        {
+            Transporte = transporte;
+            Cantidad = cantidad;
+            Fecha = date;
+
         }
     }
 }

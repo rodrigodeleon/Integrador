@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Integrador.Models;
 using Integrador.ViewModels;
 using System.Web.Script.Serialization;
+using System.Globalization;
 
 namespace Integrador.Controllers
 {
@@ -49,16 +50,59 @@ namespace Integrador.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Fecha")] Compra compra)
+        public ActionResult Create(CompraViewModel cvm)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                db.Compras.Add(compra);
+                JavaScriptSerializer oJS = new JavaScriptSerializer();
+                if (cvm.excursionesJson != null)
+                {
+                    IEnumerable<IDictionary<String, String>> aux = (IEnumerable<IDictionary<String, String>>)oJS.Deserialize(cvm.excursionesJson, typeof(IEnumerable<IDictionary<String, String>>));
+                    foreach (IDictionary<String, String> res in aux)
+                    {
+                        int id = int.Parse(res["Id"]);
+                        int cant = int.Parse(res["Cantidad"]);
+                        ExcursionCompra miEC = new ExcursionCompra(db.Excursions.Find(id), cant);
+                        cvm.miCompra.Excursiones.Add(miEC);
+
+                    }
+                }
+
+                if (cvm.transportesJson != null)
+                {
+                    IEnumerable<IDictionary<String, String>> aux = (IEnumerable<IDictionary<String, String>>)oJS.Deserialize(cvm.transportesJson, typeof(IEnumerable<IDictionary<String, String>>));
+                    foreach (IDictionary<String, String> res in aux)
+                    {
+                        int id = int.Parse(res["Id"]);
+                        int cant = int.Parse(res["Cantidad"]);
+                        DateTime fecha = DateTime.Parse(res["Fecha de Viaje"]);
+                       // string x = fecha.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
+                       
+                        TransporteCompra miTC = new TransporteCompra(db.Transportes.Find(id), cant,fecha);
+                        cvm.miCompra.Transportes.Add(miTC);
+
+                    }
+                }
+                cvm.miCompra.Cliente = db.Personas.Find(cvm.miCompra.Cliente.Id);
+
+                db.Compras.Add(cvm.miCompra);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+
+
             }
 
-            return View(compra);
+            catch (Exception ex)
+            {
+
+                Console.Write(ex.Message);
+                return View(cvm);
+
+
+            }
+
+
         }
 
         public ActionResult calcularCosto(CompraViewModel cvm)

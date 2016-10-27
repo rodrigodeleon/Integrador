@@ -56,5 +56,11 @@ namespace Integrador.Models
         {
 
         }
+
+        public ExcursionCompra( Excursion excursion, int cantidad)
+        {
+            Excursion = excursion;
+            Cantidad = cantidad;
+        }
     }
 }
