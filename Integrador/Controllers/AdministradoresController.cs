@@ -17,7 +17,7 @@ namespace Integrador.Controllers
         // GET: Administradores
         public ActionResult Index()
         {
-            return View(db.Personas.ToList());
+            return View(db.Personas.OfType<Administrador>().ToList());
         }
 
         // GET: Administradores/Details/5

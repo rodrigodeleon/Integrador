@@ -20,12 +20,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Destinos", "Index", "Destinos")</li>
-                    <li>@Html.ActionLink("Transportes", "Index", "Transportes")</li>
-                    <li>@Html.ActionLink("Excursiones", "Index", "Excursiones")</li>
-                    <li>@Html.ActionLink("Clientes", "Index", "Personas")</li>
-                    <li>@Html.ActionLink("Compras", "Index", "Compras")</li>
-
+                    @if (Session["acceso"] != null)
+                    {
+                        <li>@Html.ActionLink("Destinos", "Index", "Destinos")</li>
+                        <li>@Html.ActionLink("Transportes", "Index", "Transportes")</li>
+                        <li>@Html.ActionLink("Excursiones", "Index", "Excursiones")</li>
+                        <li>@Html.ActionLink("Clientes", "Index", "Personas")</li>
+                        <li>@Html.ActionLink("Compras", "Index", "Compras")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                    }
 
                 </ul>
             </div>
@@ -34,7 +37,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        
+
     </div>
 
     @Scripts.Render("~/bundles/jquery")
