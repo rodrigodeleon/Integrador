@@ -13,7 +13,7 @@ namespace Integrador.Models
         private String descripcion;
         private Persona creador;
         private int duracion;
-        private Boolean activa;
+        private bool activa;
         private ICollection<Tramo> tramos;
         private ICollection<Transporte> transportes;
 
@@ -96,7 +96,7 @@ namespace Integrador.Models
                 activa = value;
             }
         }
-        [Required]
+
         public virtual ICollection<Tramo> Tramos
         {
             get

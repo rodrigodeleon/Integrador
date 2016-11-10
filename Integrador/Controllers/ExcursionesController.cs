@@ -11,6 +11,7 @@ using Integrador.ViewModels;
 using Newtonsoft.Json;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json.Linq;
+using System.Data.Entity.Validation;
 
 namespace Integrador.Controllers
 {
@@ -21,7 +22,7 @@ namespace Integrador.Controllers
         // GET: Excursiones
         public ActionResult Index()
         {
-            return View(db.Excursions.Where(x=> x.Activa==true).ToList());
+            return View(db.Excursions.Where(x => x.Activa == true).ToList());
         }
         // GET: Excursiones por ci
         public ActionResult IndexCi(int? ci)
@@ -29,7 +30,7 @@ namespace Integrador.Controllers
             try
             {
                 ViewBag.Ci = ci;
-                return View("Index", db.Excursions.Where(x => x.Creador.Ci == ci).ToList());
+                return View("Index", db.Excursions.Where(x => x.Creador.Ci == ci && x.Activa == true).ToList());
             }
             catch
             {
@@ -147,7 +148,7 @@ namespace Integrador.Controllers
         public static IEnumerable<SelectListItem> GetExcursiones()
         {
             IntegradorContext sdb = new IntegradorContext();
-            var exc = sdb.Excursions.ToList();
+            var exc = sdb.Excursions.Where(x => x.Activa == true).ToList();
             List<SelectListItem> sl = new List<SelectListItem>();
             foreach (Excursion a in exc)
             {
@@ -155,10 +156,10 @@ namespace Integrador.Controllers
 
                 foreach (Tramo t in a.Tramos)
                 {
-                    text += (t.Destino.Nombre)+ ", ";
+                    text += (t.Destino.Nombre) + ", ";
                 }
                 text += " - Duracion: " + a.Duracion.ToString() + " dias";
-                text += " - Costo Total: $" +a.getCosto().ToString();
+                text += " - Costo Total: $" + a.getCosto().ToString();
                 sl.Add(new SelectListItem
                 {
                     Value = a.Id.ToString(),
@@ -191,13 +192,19 @@ namespace Integrador.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Nombre,Descripcion,Duracion,Activa")] Excursion excursion)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(excursion).State = EntityState.Modified;
+                Excursion e = db.Excursions.Find(excursion.Id);
+                e.Nombre = excursion.Nombre;
+                e.Descripcion = excursion.Descripcion;
+                e.Creador = db.Personas.Find(e.Creador.Id);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(excursion);
+            catch
+            {
+                return View(excursion);
+            }
         }
 
         // GET: Excursiones/Delete/5
@@ -217,13 +224,28 @@ namespace Integrador.Controllers
 
         // POST: Excursiones/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Excursion excursion = db.Excursions.Find(id);
-            db.Excursions.Remove(excursion);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Excursion excursion = db.Excursions.Find(id);
+                excursion.Activa = false;
+                excursion.Creador = db.Personas.Find(excursion.Creador.Id);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                    {
+                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                    }
+                }
+                return View();
+            }
         }
 
         protected override void Dispose(bool disposing)

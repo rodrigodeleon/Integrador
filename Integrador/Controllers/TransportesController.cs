@@ -41,8 +41,8 @@ namespace Integrador.Controllers
         {
             IntegradorContext sdb = new IntegradorContext();
 
-            var Transportes = sdb.Transportes.Select
-                       (x =>
+            var Transportes = sdb.Transportes.Where(x => x.Activo == true).Select
+                       (x => 
                                 new SelectListItem
                                 {
                                     Value = x.Id.ToString(),
@@ -167,6 +167,25 @@ namespace Integrador.Controllers
         {
             Transporte transporte = db.Transportes.Find(id);
             transporte.Activo = false;
+            var excursiones = db.Excursions.Where(x => x.Activa == true).ToList();
+            foreach (Excursion e in excursiones)
+            {
+               
+                  foreach (Transporte t in e.Transportes)
+                    {
+                        if (t.Id == transporte.Id && e.Activa == true )
+                        {
+                            Excursion excursion = db.Excursions.Find(e.Id);
+                            excursion.Activa = false;
+                            excursion.Creador = db.Personas.Find(excursion.Creador.Id);
+
+                            db.SaveChanges();
+                            e.Activa = false;
+                        }
+
+                    }
+
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }

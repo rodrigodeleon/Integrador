@@ -131,6 +131,48 @@ namespace Integrador.Controllers
         {
             Destino destino = db.Destinos.Find(id);
             destino.Activo = false;
+            var transportes = db.Transportes.Where(x => x.Origen.Id == destino.Id || x.Destino.Id == destino.Id).ToList();
+            foreach (Transporte t in transportes)
+            {
+                t.Activo = false;
+            }
+            var excursiones = db.Excursions.Where(x => x.Activa == true).ToList();
+            foreach (Excursion e in excursiones)
+            {
+                foreach (Tramo t in e.Tramos)
+                {
+                    if (t.Destino.Id == destino.Id && e.Activa == true)
+                    {
+
+                        Excursion excursion = db.Excursions.Find(e.Id);
+                        excursion.Activa = false;
+                        excursion.Creador = db.Personas.Find(excursion.Creador.Id);
+                       
+                        db.SaveChanges();
+                        e.Activa = false;
+
+                    }
+                }
+
+                if (e.Activa == true)
+                {
+                    foreach (Transporte t in e.Transportes)
+                    {
+                        if (t.Origen.Id == destino.Id || t.Destino.Id == destino.Id)
+                        {
+                            Excursion excursion = db.Excursions.Find(e.Id);
+                            excursion.Activa = false;
+                            excursion.Creador = db.Personas.Find(excursion.Creador.Id);
+
+                            db.SaveChanges();
+                            e.Activa = false;
+                        }
+
+                    }
+                }
+
+
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }

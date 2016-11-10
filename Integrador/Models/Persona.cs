@@ -16,6 +16,7 @@ namespace Integrador.Models
         private int telefono;
         private String email;
         private DateTime fechaNac;
+        private Boolean activo;
 
         [Key]
         public int Id
@@ -114,8 +115,18 @@ namespace Integrador.Models
             }
         }
 
+        public bool Activo
+        {
+            get
+            {
+                return activo;
+            }
 
-
+            set
+            {
+                activo = value;
+            }
+        }
 
         public Persona()
         {
