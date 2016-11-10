@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Integrador.Models.Transporte>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista Transportes";
 }
 
 <h3>Transportes</h3>
@@ -41,7 +41,6 @@
             @Html.DisplayFor(modelItem => item.Medio)
         </td>
         <td>
-            @Html.ActionLink("Editar Costo", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
             @Html.ActionLink("Borrar", "Delete", new { id=item.Id })
         </td>

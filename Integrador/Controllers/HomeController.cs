@@ -7,16 +7,17 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace Integrador.Controllers
-{
+{ }
     public class HomeController : Controller
     {
         IntegradorContext db = new IntegradorContext();
         [HttpGet]
         public ActionResult Index()
         {
-            if (Session["acceso"] != null)
-                return RedirectToAction("Home", "Home");
-
+        if (Session["acceso"] != null)
+        {           
+            return RedirectToAction("Home", "Home");
+        }
             return View();
         }
         [HttpPost]
@@ -31,6 +32,8 @@ namespace Integrador.Controllers
                 {
                     if (a.Password == u.Password)
                     {
+
+                        
                         Session["acceso"] = a;
                         return RedirectToAction("Index", "Home");
                     }
@@ -64,4 +67,3 @@ namespace Integrador.Controllers
         }
 
     }
-}
