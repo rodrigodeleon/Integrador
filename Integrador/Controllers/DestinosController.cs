@@ -17,7 +17,7 @@ namespace Integrador.Controllers
         // GET: Destinos
         public ActionResult Index()
         {
-            return View(db.Destinos.ToList());
+            return View(db.Destinos.Where(x => x.Activo == true).ToList());
         }
 
         // GET: Destinos/Details/5

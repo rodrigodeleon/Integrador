@@ -19,7 +19,7 @@ namespace Integrador.Controllers
         // GET: Transportes
         public ActionResult Index()
         {
-            return View(db.Transportes.ToList());
+            return View(db.Transportes.Where(x => x.Activo == true).ToList());
         }
 
         // GET: Transportes/Details/5

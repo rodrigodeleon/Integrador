@@ -21,7 +21,7 @@ namespace Integrador.Controllers
         // GET: Excursiones
         public ActionResult Index()
         {
-            return View(db.Excursions.ToList());
+            return View(db.Excursions.Where(x=> x.Activa==true).ToList());
         }
         // GET: Excursiones por ci
         public ActionResult IndexCi(int? ci)
