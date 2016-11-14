@@ -268,12 +268,10 @@
     <Content Include="Views\Transportes\Create.cshtml" />
     <Content Include="Views\Transportes\Delete.cshtml" />
     <Content Include="Views\Transportes\Details.cshtml" />
-    <Content Include="Views\Transportes\Edit.cshtml" />
     <Content Include="Views\Transportes\Index.cshtml" />
     <Content Include="Views\Destinos\Create.cshtml" />
     <Content Include="Views\Destinos\Delete.cshtml" />
     <Content Include="Views\Destinos\Details.cshtml" />
-    <Content Include="Views\Destinos\Edit.cshtml" />
     <Content Include="Views\Destinos\Index.cshtml" />
     <Content Include="Views\Excursiones\Create.cshtml" />
     <Content Include="Views\Excursiones\Delete.cshtml" />
@@ -291,9 +289,7 @@
     <Content Include="Views\Administradores\Edit.cshtml" />
     <Content Include="Views\Administradores\Index.cshtml" />
     <Content Include="Views\Compras\Create.cshtml" />
-    <Content Include="Views\Compras\Delete.cshtml" />
     <Content Include="Views\Compras\Details.cshtml" />
-    <Content Include="Views\Compras\Edit.cshtml" />
     <Content Include="Views\Compras\Index.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
   </ItemGroup>
